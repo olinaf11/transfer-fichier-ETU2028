@@ -1,0 +1,4 @@
+'
+set xlabel 'Temps (s)'
+set ylabel 'Valeurs'
+set yrange [-1.5

@@ -1,0 +1,2 @@
+set term wxt size 800,600
+set title 'Resulat en mesure et sin(x)
