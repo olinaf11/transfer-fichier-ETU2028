@@ -65,8 +65,9 @@ public class ServerReceiveHandler implements Runnable{
                 dataOutputStream.write(fileNameBytes);
 
                 dataOutputStream.writeInt(fileContentBytes.length);
-                System.out.println("nandefa: "+fileContentBytes.length);
-                dataOutputStream.write(fileContentBytes);
+                System.out.println(fileContentBytes.length);
+                System.out.println(new String(fileContentBytes));
+                dataOutputStream.write(fileContentBytes, 0, fileContentBytes.length);
                 dataOutputStream.flush();
                 System.out.println("lasa");
             }

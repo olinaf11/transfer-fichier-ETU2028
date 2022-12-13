@@ -23,8 +23,6 @@ public class ClientReceiveHandler implements Runnable{
     @Override
     public void run() {
         while (true) {
-
-
             //MAKA ILAY FICHIER NILAINA
             try{
                 DataInputStream dataInputStream = new DataInputStream(this.getSocket().getInputStream());
@@ -40,6 +38,7 @@ public class ClientReceiveHandler implements Runnable{
                 byte[] fileContentBytes = new byte[fileContentLength];
                 dataInputStream.readFully(fileContentBytes,0,fileContentLength);
                 //MAMETRAKA ILAY FICHIER AZO ANATY REPERTOIRE
+                System.out.println(new String(fileContentBytes));
                 File fileToDownload = new File("./FileReceive/"+filename);
                 FileOutputStream fileOutputStream = new FileOutputStream(fileToDownload,true);
                 fileOutputStream.write(fileContentBytes);
