@@ -140,7 +140,6 @@ public class Serveur {
     public static void sendFile(Socket client, String folder) throws Exception{
         DataInputStream input = new DataInputStream(client.getInputStream());
         setFile(input, folder);
-        client.close();
     }
     public static String getName(DataInputStream din) throws IOException {
         byte[] b = haveByte(din);

@@ -35,43 +35,45 @@ public class ServerReceiveHandler implements Runnable{
     @Override
     public void run() {
         try {
-            //maka ny ANARAN ilay fichier omena azy
-            System.out.println("okkkkkkkkkk");
-            ObjectInputStream obj=new ObjectInputStream(getServeur().getClient().getSocket().getInputStream());
-            String filetodownload=(String)obj.readObject();
-            System.out.println("okkkkkkkkkkbeeeeeeeeee");
-            System.out.println(filetodownload);
+            while (true){
+                //maka ny ANARAN ilay fichier omena azy
+                System.out.println("okkkkkkkkkk");
+                ObjectInputStream obj=new ObjectInputStream(getServeur().getClient().getSocket().getInputStream());
+                String filetodownload=(String)obj.readObject();
+                System.out.println("okkkkkkkkkkbeeeeeeeeee");
+                System.out.println(filetodownload);
 
-            // System.out.println(this.getSocket().isClosed()+"1");
-            //mandefa fichier nilainy
-            String[] nomfichierserversecondaire={"save1","save2","save3"};
+                 System.out.println(getServeur().getSocketSec()[0].isClosed()+"1");
+                //mandefa fichier nilainy
+                String[] nomfichierserversecondaire={"save1","save2","save3"};
 
-            //mandefa any @ client ireo fichier anaty nomfichierserversecondaire
+                //mandefa any @ client ireo fichier anaty nomfichierserversecondaire
 
-            for (int i = 0; i < getServeur().getSocketSec().length; i++) {
-                String stringBuilder=this.getPath().toString()+"//"+nomfichierserversecondaire[i]+"//"+filetodownload;
-                System.out.println(stringBuilder);
-                File file=new File(stringBuilder);
-                FileInputStream fileInputStream = new FileInputStream(file);
-                DataOutputStream dataOutputStream = new DataOutputStream(getServeur().getClient().getSocket().getOutputStream());
-                // System.out.println(this.getSocket().isClosed()+"2");
-                String filename = file.getName();
-                byte[] fileNameBytes = filename.getBytes();
-                byte[] fileContentBytes = new byte[(int)file.length()];
-                fileInputStream.read(fileContentBytes);
+                for (int i = 0; i < getServeur().getSocketSec().length; i++) {
+                    String stringBuilder=this.getPath().toString()+"//"+nomfichierserversecondaire[i]+"//"+filetodownload;
+                    System.out.println(stringBuilder);
+                    File file=new File(stringBuilder);
+                    FileInputStream fileInputStream = new FileInputStream(file);
+                    DataOutputStream dataOutputStream = new DataOutputStream(getServeur().getClient().getSocket().getOutputStream());
+                     System.out.println(getServeur().getSocketSec()[i].isClosed()+" "+i);
+                    String filename = file.getName();
+                    byte[] fileNameBytes = filename.getBytes();
+                    byte[] fileContentBytes = new byte[(int)file.length()];
+                    fileInputStream.read(fileContentBytes);
 
-                dataOutputStream.writeInt(fileNameBytes.length);
-                System.out.println(fileNameBytes.length);
-                dataOutputStream.write(fileNameBytes);
+                    dataOutputStream.writeInt(fileNameBytes.length);
+                    System.out.println(fileNameBytes.length);
+                    dataOutputStream.write(fileNameBytes);
 
-                dataOutputStream.writeInt(fileContentBytes.length);
-                System.out.println(fileContentBytes.length);
-                System.out.println(new String(fileContentBytes));
-                dataOutputStream.write(fileContentBytes, 0, fileContentBytes.length);
-                dataOutputStream.flush();
+                    dataOutputStream.writeInt(fileContentBytes.length);
+                    System.out.println(fileContentBytes.length);
+                    System.out.println(new String(fileContentBytes));
+                    dataOutputStream.write(fileContentBytes, 0, fileContentBytes.length);
+                    System.out.println("lasa ny "+(i+1) );
+                    dataOutputStream.flush();
+                }
                 System.out.println("lasa");
             }
-
         } catch (Exception l) {
             // TODO: handle exception
             l.printStackTrace();
