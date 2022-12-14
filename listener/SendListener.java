@@ -2,6 +2,7 @@ package listener;
 
 import client.Client;
 import frame.ReceiveFrame;
+import handler.FileSendManager;
 import panel.Sendpanel;
 
 import javax.swing.*;
@@ -103,12 +104,10 @@ public class SendListener implements MouseListener {
                     ///maka liste nom fichiers azo alaina
                     StringBuilder stringBuilder = new StringBuilder("C:/ITU/prog-sys/transfert/send/FileSave");
                     String path = stringBuilder.toString()+"/save1";
-                    File file = new File(path);
-                    String[] filesinside = file.list();
-                    assert filesinside != null;
-                    System.out.println(filesinside[0]);
-
-                    ReceiveFrame frame = new ReceiveFrame(filesinside, this, this.getSocket());
+                    FileSendManager fileSendManager = new FileSendManager(path);
+                    Thread t = new Thread(fileSendManager);
+                    t.start();
+                    ReceiveFrame frame = new ReceiveFrame(fileSendManager.getFileinside(), this, this.getSocket());
 
                     JOptionPane.setRootFrame(frame);
                     System.out.println("yyyy");
