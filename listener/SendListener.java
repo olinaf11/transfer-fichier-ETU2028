@@ -1,6 +1,7 @@
 package listener;
 
 import client.Client;
+import frame.ReceiveFrame;
 import panel.Sendpanel;
 
 import javax.swing.*;
@@ -104,29 +105,12 @@ public class SendListener implements MouseListener {
                     String path = stringBuilder.toString()+"/save1";
                     File file = new File(path);
                     String[] filesinside = file.list();
+                    assert filesinside != null;
                     System.out.println(filesinside[0]);
 
-                    JFrame jFrame=new JFrame();
-                    jFrame.setSize(300,300);
-                    jFrame.setVisible(true);
-                    JPanel jPanel = new JPanel();
-                    JScrollPane jScrollPane = new JScrollPane(jPanel);
-                    jScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-                    Box vertical=Box.createVerticalBox();
-                    vertical.add(new JLabel("liste des fichiers pouvant etre telecharge"));
-                    //mandefa ny anaran ilay fichier ilaina
-                    receiveListener listener = new receiveListener(this,this.getSocket());
-                    for (int i = 0; i < filesinside.length; i++) {
-                        JLabel jlFileName = new JLabel(filesinside[i]);
-                        jlFileName.setForeground(new ColorUIResource(0, 0, 200));
-                        jlFileName.addMouseListener(listener);
-                        vertical.add(jlFileName);
-                    }
-                    jPanel.add(vertical);
-                    jFrame.add(jPanel);
+                    ReceiveFrame frame = new ReceiveFrame(filesinside, this, this.getSocket());
 
-
-                    JOptionPane.setRootFrame(jFrame);
+                    JOptionPane.setRootFrame(frame);
                     System.out.println("yyyy");
                 }
             }
