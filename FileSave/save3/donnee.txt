@@ -1,3 +1,0 @@
-:2]
-set style data linespoints
-2.001plot 'mesure.txt', sin(x)

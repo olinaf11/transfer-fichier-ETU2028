@@ -38,7 +38,6 @@ public class Serveur1 {
         }
     }
 
-
     public static void main(String[] args) {
         try {
             Serveur1 serveur1 = new Serveur1();

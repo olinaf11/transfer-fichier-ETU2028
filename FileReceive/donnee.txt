@@ -1,7 +1,0 @@
-set term wxt size 800,600
-set title 'Resulat en mesure et sin(x)'
-set xlabel 'Temps (s)'
-set ylabel 'Valeurs'
-set yrange [-1.5:2]
-set style data linespoints
-2.001plot 'mesure.txt', sin(x)

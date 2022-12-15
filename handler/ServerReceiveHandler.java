@@ -2,6 +2,7 @@ package handler;
 
 import serveur.Serveur;
 
+import javax.swing.*;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -43,19 +44,19 @@ public class ServerReceiveHandler implements Runnable{
                 System.out.println("okkkkkkkkkkbeeeeeeeeee");
                 System.out.println(filetodownload);
 
-                 System.out.println(getServeur().getSocketSec()[0].isClosed()+"1");
+                 System.out.println(getServeur().getSocketSec().get(0).getSocket().isClosed()+"1");
                 //mandefa fichier nilainy
                 String[] nomfichierserversecondaire={"save1","save2","save3"};
 
                 //mandefa any @ client ireo fichier anaty nomfichierserversecondaire
 
-                for (int i = 0; i < getServeur().getSocketSec().length; i++) {
+                for (int i = 0; i < getServeur().getSocketSec().size(); i++) {
                     String stringBuilder=this.getPath().toString()+"//"+nomfichierserversecondaire[i]+"//"+filetodownload;
                     System.out.println(stringBuilder);
                     File file=new File(stringBuilder);
                     FileInputStream fileInputStream = new FileInputStream(file);
                     DataOutputStream dataOutputStream = new DataOutputStream(getServeur().getClient().getSocket().getOutputStream());
-                     System.out.println(getServeur().getSocketSec()[i].isClosed()+" "+i);
+                    System.out.println(getServeur().getSocketSec().get(i).getSocket().isClosed()+" "+i);
                     String filename = file.getName();
                     byte[] fileNameBytes = filename.getBytes();
                     byte[] fileContentBytes = new byte[(int)file.length()];
@@ -72,7 +73,7 @@ public class ServerReceiveHandler implements Runnable{
                     System.out.println("lasa ny "+(i+1) );
                     dataOutputStream.flush();
                 }
-                System.out.println("lasa");
+                JOptionPane.showMessageDialog(new JFrame(), "Efa tonga");
             }
         } catch (Exception l) {
             // TODO: handle exception
