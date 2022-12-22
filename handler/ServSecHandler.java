@@ -32,8 +32,10 @@ public class ServSecHandler implements Runnable{
     @Override
     public void run() {
         try {
-            Serveur.sendFile(getClient(), getFolder());
-            System.out.println("tonga");
+            if(getClient().getInputStream()!=null){
+                Serveur.sendFile(getClient(), getFolder());
+                System.out.println("tonga");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

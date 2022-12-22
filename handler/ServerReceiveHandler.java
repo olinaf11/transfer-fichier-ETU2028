@@ -73,7 +73,7 @@ public class ServerReceiveHandler implements Runnable{
                     System.out.println("lasa ny "+(i+1) );
                     dataOutputStream.flush();
                 }
-                JOptionPane.showMessageDialog(new JFrame(), "Efa tonga");
+                JOptionPane.showMessageDialog(new JFrame(), "Arrived!!");
             }
         } catch (Exception l) {
             // TODO: handle exception

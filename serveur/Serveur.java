@@ -3,6 +3,7 @@ package serveur;
 import client.Client;
 import handler.ServerHandler;
 
+import javax.swing.*;
 import java.io.*;
 import java.net.*;
 import java.util.Vector;
@@ -48,7 +49,9 @@ public class Serveur {
     public Serveur() throws IOException {
         System.out.println("Wait for the client");
         setClient(new Client());
-        setSocketSec(getClientDisp(3));
+        for (int i = 0; i < 3; i++) {
+            getSocketSec().add(new Client(new Socket("localhost", 1011+(1+i))));
+        }
     }
     public Vector<Client> getClientDisp(int length) throws IOException {
         Vector<Client> clients = new Vector<>();
@@ -124,6 +127,7 @@ public class Serveur {
             getSocketSec().get(increment-1).getOutput().flush();
 //            getSocketSec().get(increment-1).getOutput().close();
         }
+        JOptionPane.showMessageDialog(new JFrame(), "Send");
     }
     public static void setFile(DataInputStream input, String folder) throws IOException {
         String fileName = getName(input);

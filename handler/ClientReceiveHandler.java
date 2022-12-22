@@ -42,7 +42,6 @@ public class ClientReceiveHandler implements Runnable{
             File fileToDownload = new File("./FileReceive/"+filename);
             FileOutputStream fileOutputStream = new FileOutputStream(fileToDownload,true);
             fileOutputStream.write(fileContentBytes);
-            JOptionPane.showMessageDialog(new JFrame(), "Received!!");
             System.out.println("tongaaaaa");
         }catch (Exception ex){
             System.out.println(ex.getMessage());
