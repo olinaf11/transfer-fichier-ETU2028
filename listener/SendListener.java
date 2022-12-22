@@ -75,7 +75,7 @@ public class SendListener implements MouseListener {
                 if (jb.getName().compareTo("choose") == 0){
                     JFileChooser jfc = new JFileChooser();
                     jfc.showOpenDialog(null);
-//                    jfc.setCurrentDirectory(new File("C:/ITU/Mr Robinson/\"MethNum\""));
+//                    jfc.setCurrentDirectory(new File("C:/ITU/javaScript"));
                     if (jfc.getSelectedFile() != null){
                         setFiletoSend(jfc.getSelectedFile());
                         getSendpanel().getJTextField().setText(jfc.getSelectedFile().getName());
